@@ -25,3 +25,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def tradeStrat(exchange):
+    tradeBonds(1, "BUY", 999)
+    tradeBonds(1, "SELL", 1001)
