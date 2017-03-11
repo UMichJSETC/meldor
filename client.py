@@ -75,6 +75,7 @@ if __name__ == "__main__":
             tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
             sellIndex = sellIndex + 2
             x = time.time()
+            print("BOND ORDER PLACED")
         feed = read(exchange)
         type = feed['type']
         if (type == "trade"):
