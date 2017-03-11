@@ -63,16 +63,16 @@ def VALTrader(VALBZ_F, VALE_F,VALBZ_C, VALE_C):
         buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
         sellFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
     if ( VALE_C == 10):
-        print ("VALE_C = 10")
         conversionVALE(10-VALBZ_C,"SELL")
+        VALE_C -= 10-VALE_C
+        VALBZ_C += 10-VALBZ_C
     elif (VALE_C == -10):
-        print ("VALE_C = -10")
         conversionVALE(10+VALBZ_C,"BUY")
+        VALE_C += 10+VALBZ_C
+        VALBZ_C -= 10+VALBZ_C
     if (VALBZ_C == 10):
-        print ("VALBZ_C = 10")
         sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 1003, 9)
     elif (VALBZ_C == -10):
-        print ("VALBZ_C = -10")
         buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 1004, 9)
         
 
