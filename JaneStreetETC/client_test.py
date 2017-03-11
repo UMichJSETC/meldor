@@ -202,13 +202,14 @@ if __name__ == "__main__":
             
             
             VALTrader(BZFair, EFair,valbz_count, vale_count)
-        xlfTrue = XLF_true(bondFair, gsFair, msFair, wfcFair)
-        if (xlfTrue > xlfFair):
+        if (gsFair != 0 && msFair !=0 && wfcFair):
+            xlfTrue = XLF_true(1000, gsFair, msFair, wfcFair)
+        if (xlfTrue > xlfFair && (xlfFair != 0)):
             print("xlfTrue happens")
-            sellPackage(bondFair, gsFair, msFair, wfcFair)
+            sellPackage(1000, gsFair, msFair, wfcFair)
             buyFair(xlfTrue, "XLF", 2017, 1)
         else:
-            buyPackage(bondFair, gsFair, msFair, wfcFair)
+            buyPackage(1000, gsFair, msFair, wfcFair)
             sellFair(xlfTrue, "XLF", 2018, 1)
         if (type == "fill"):
             orderID = feed['order_id']
