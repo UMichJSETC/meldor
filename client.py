@@ -4,6 +4,15 @@ from __future__ import print_function
 import sys
 import socket
 import json
+def tradeBonds(volume, buy_sell, price, ID):
+    order = "ADD "
+    order += ID
+    order += " BOND"
+    order += buy_sell
+    order += " "
+    order += price
+    order += " "
+    order += volume
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,16 +26,15 @@ def write(exchange, obj):
 def read(exchange):
     return json.loads(exchange.readline())
 
-def main():
+if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
     hello_from_exchange = read(exchange)
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
-
-if __name__ == "__main__":
-    main()
-
-
-def tradeStrat(exchange):
-    tradeBonds(1, "BUY", 999)
-    tradeBonds(1, "SELL", 1001)
+    buyIndex = 0
+    sellIndex = 0
+    while(True):
+        tradeBonds(1, "BUY", 99, buyIndex)
+        ++buyIndex
+        tradeBonds(1, "SELL", 101, sellIndex)
+        ++sellIndex
