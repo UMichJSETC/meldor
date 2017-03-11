@@ -59,6 +59,8 @@ if __name__ == "__main__":
     sellIndex = 2
 
     x = time.time()
+    tradeBonds(exchange, 100, "BUY", 999, buyIndex)
+    tradeBonds(exchange, 100, "SELL", 1001, sellIndex)
     while(True):
         if (time.time() > (x + 1)):
             tradeBonds(exchange, 1, "BUY", 999, buyIndex)
@@ -77,6 +79,8 @@ if __name__ == "__main__":
                     valbz.append(price)
                     valbz.pop(0)
                 else:
+                    if (len(valbz) > 5):
+                        BZFull = True
                     valbz.append(price)
                 BZFair = np.median(valbz)
             elif (symbol == "VALE"):
@@ -84,9 +88,12 @@ if __name__ == "__main__":
                     vale.append(price)
                     vale.pop(0)
                 else:
+                    if (len(vale) > 5):
+                        EFull = True
                     vale.append(price)
                 EFair = np.median(vale)
             
+            VALTrader(BZFair, EFair)
 
             print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
