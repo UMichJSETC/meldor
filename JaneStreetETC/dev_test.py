@@ -5,6 +5,7 @@ import sys
 import socket
 import json
 import time
+import numpy as np
 
 
 def connect():
@@ -34,7 +35,28 @@ def sellFair(fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
 
+def cancel(ID):
+    {"type": "cancel", "order_id": ID}
+
+
+def VALTrader(VALBZ_F, VALE_F):
+    cancel(999);
+    cancel(1000);
+    if (VALBZ_F > VALE_F):
+        sellFair(int(VALE_F + (VALBZ_F - VALE_F) / 10), "VALBZ", 999, 1)
+        buyFair(int(VALE_F + (VALBZ_F - VALE_F) / 10), "VALE", 1000, 1)
+    else:
+        buyFair(int(VALBZ_F + 9 * (VALE_F - VALBZ_F) / 10), "VALBZ", 999, 1)
+        sellFair(int(VALBZ_F + 9 * (VALE_F - VALBZ_F) / 10), "VALE", 1000, 1)
+
+
 curr_trades = []
+EFull = False
+BZFull = False
+EFair = 0
+BZFair = 0
+valbz = []
+vale = []
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
@@ -44,6 +66,8 @@ if __name__ == "__main__":
     sellIndex = 2
 
     x = time.time()
+    tradeBonds(exchange, 100, "BUY", 999, buyIndex)
+    tradeBonds(exchange, 100, "SELL", 1001, sellIndex)
     while (True):
         if (time.time() > (x + 1)):
             tradeBonds(exchange, 1, "BUY", 999, buyIndex)
@@ -53,20 +77,42 @@ if __name__ == "__main__":
             x = time.time()
         feed = read(exchange)
         type = feed['type']
+        if (type == "fill"):
+            symbol = feed['symbol']
+            if (symbol == "VALBZ"):
+                VALBZCount = VALBZCount + 1
+            if (symbol == "VALE"):
+                VALECount = VALECount + 1
         if (type == "trade"):
             symbol = feed['symbol']
             price = feed['price']
             size = feed['size']
-            print("Trade: Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
-        if (type == "book"):
-            symbol = feed['symbol']
-        if (type == "fill"):
-            orderID = feed['order_id']
-            symbol = feed['symbol']
-            price = feed['price']
-            size = feed['size']
-            print("Order Fill: Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
+            if (symbol == "VALBZ"):
+                if (BZFull):
+                    valbz.append(price)
+                    valbz.pop(0)
+                else:
+                    if (len(valbz) > 5):
+                        BZFull = True
+                    valbz.append(price)
+                    print("We did it!")
+                BZFair = np.median(valbz)
+            elif (symbol == "VALE"):
+                if (EFull):
+                    vale.append(price)
+                    vale.pop(0)
+                else:
+                    if (len(vale) > 5):
+                        EFull = True
+                    vale.append(price)
+                EFair = np.median(vale)
 
+            VALTrader(BZFair, EFair)
+
+            print("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
+        if (type == "fill")
+            symbol = feed['symbol']
+            price = feed
 
         hello_from_exchange = read(exchange)
         # print("The exchange replied:", hello_from_exchange, file=sys.stderr)
