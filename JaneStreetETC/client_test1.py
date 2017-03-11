@@ -11,7 +11,7 @@ import numpy as np
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("10.0.11.90", 25000))
+    s.connect(("10.0.11.90", 25001))
     return s.makefile('rw', 1)
 
 def write(exchange, obj):
