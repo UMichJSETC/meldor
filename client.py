@@ -33,6 +33,10 @@ if __name__ == "__main__":
     while(True):
         time.sleep(1)
         tradeBonds(exchange, 1, "BUY", 999, buyIndex)
+        hello_from_exchange = read(exchange)
+        print("The exchange replied:", hello_from_exchange, file=sys.stderr)
         ++buyIndex
         tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
+        hello_from_exchange = read(exchange)
+        print("The exchange replied:", hello_from_exchange, file=sys.stderr)
         ++sellIndex
