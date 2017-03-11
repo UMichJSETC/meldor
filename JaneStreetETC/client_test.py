@@ -40,40 +40,40 @@ def sellPackage(bond, gs, ms, wfc):
 def tradeBonds(exchange, volume, buy_sell, price, ID):
     write(exchange, {"type": "add", "order_id": ID, "symbol": "BOND", "dir": buy_sell, "price": price, "size": volume})
 
-def buyFair(fair, item, ID, volume):
+def buyFair(exchange, fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "BUY", "price": fair - 1, "size": volume})
     
-def sellFair(fair, item, ID, volume):
+def sellFair(exchange, fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
 def cancel(ID):
     {"type": "cancel", "order_id": ID}
-def conversionVALE(volume,buy_sell):
+def conversionVALE(exchange, volume,buy_sell):
     write(exchange, {"type": "convert","order_id":1002,"symbol":"VALE", "dir": buy_sell, "size": volume})
 
-def VALTrader(VALBZ_F, VALE_F,VALBZ_C, VALE_C):
+def VALTrader(exchange, VALBZ_F, VALE_F,VALBZ_C, VALE_C):
     cancel(999);
     cancel(1000);
     cancel(1003);
     cancel(1004);
     if (VALBZ_F > VALE_F):
-        sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 1)
-        buyFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALE", 1000, 1)
+        sellFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 1)
+        buyFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALE", 1000, 1)
     else:
-        buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
-        sellFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
+        buyFair(exchange, int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
+        sellFair(exchange, int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
     if ( VALE_C == 10):
-        conversionVALE(10-VALBZ_C,"SELL")
+        conversionVALE(exchange, 10-VALBZ_C,"SELL")
         VALE_C -= 10-VALE_C
         VALBZ_C += 10-VALBZ_C
     elif (VALE_C == -10):
-        conversionVALE(10+VALBZ_C,"BUY")
+        conversionVALE(exchange, 10+VALBZ_C,"BUY")
         VALE_C += 10+VALBZ_C
         VALBZ_C -= 10+VALBZ_C
     if (VALBZ_C == 10):
-        sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 1003, 9)
+        sellFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 1003, 9)
     elif (VALBZ_C == -10):
-        buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 1004, 9)
+        buyFair(exchange, int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 1004, 9)
         
 
 
@@ -127,20 +127,20 @@ if __name__ == "__main__":
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Buying XLF True")
                 #sellPackage(1000, gsFair, msFair, wfcFair)
-                sellFair(1000, "BOND", 2011, 3)
-                sellFair(gsFair, "GS", 2012, 2)
-                sellFair(msFair, "MS", 2013, 3)
-                sellFair(wfcFair, "WFC", 2014, 2)
-                buyFair(xlfTrue, "XLF", 2017, 1)
+                sellFair(exchange, 1000, "BOND", 2011, 3)
+                sellFair(exchange, gsFair, "GS", 2012, 2)
+                sellFair(exchange, msFair, "MS", 2013, 3)
+                sellFair(exchange, wfcFair, "WFC", 2014, 2)
+                buyFair(exchange, xlfTrue, "XLF", 2017, 1)
             else:
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Selling XLF Fair")
                 #buyPackage(1000, gsFair, msFair, wfcFair)
-                buyFair(1000, "BOND", 2011, 3)
-                buyFair(gsFair, "GS", 2012, 2)
-                buyFair(msFair, "MS", 2013, 3)
-                buyFair(wfcFair, "WFC", 2014, 2)
-                sellFair(xlfTrue, "XLF", 2018, 1)
+                buyFair(exchange,1000, "BOND", 2011, 3)
+                buyFair(exchange, gsFair, "GS", 2012, 2)
+                buyFair(exchange, msFair, "MS", 2013, 3)
+                buyFair(exchange, wfcFair, "WFC", 2014, 2)
+                sellFair(exchange, xlfTrue, "XLF", 2018, 1)
             x = time.time()
 
         feed = read(exchange)
@@ -223,7 +223,7 @@ if __name__ == "__main__":
                 xlfFair = np.median(xlf_ar)
             
             
-            VALTrader(BZFair, EFair,valbz_count, vale_count)
+            VALTrader(exchange, BZFair, EFair,valbz_count, vale_count)
 
 
 
