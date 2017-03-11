@@ -5,6 +5,7 @@ import sys
 import socket
 import json
 import time
+import numpy as np
 
 
 
@@ -34,6 +35,8 @@ EFull = False
 BZFull = False
 EFair = 0
 BZFair = 0
+valbz = []
+vale = []
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
