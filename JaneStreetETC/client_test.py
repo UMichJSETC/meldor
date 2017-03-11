@@ -202,13 +202,16 @@ if __name__ == "__main__":
             
             
             VALTrader(BZFair, EFair,valbz_count, vale_count)
-        if (gsFair != 0 && msFair !=0 && wfcFair):
+        if (gsFair != 0 and msFair !=0 and wfcFair):
             xlfTrue = XLF_true(1000, gsFair, msFair, wfcFair)
-        if (xlfTrue > xlfFair && (xlfFair != 0)):
-            print("xlfTrue happens")
+        if (xlfTrue > xlfFair and (xlfFair != 0)):
+            print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
+            print("Buying XLF True")
             sellPackage(1000, gsFair, msFair, wfcFair)
             buyFair(xlfTrue, "XLF", 2017, 1)
         else:
+            print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
+            print("Selling XLF Fair")
             buyPackage(1000, gsFair, msFair, wfcFair)
             sellFair(xlfTrue, "XLF", 2018, 1)
         if (type == "fill"):
