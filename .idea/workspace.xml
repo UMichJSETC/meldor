@@ -24,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="client.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+            <state relative-caret-position="659">
+              <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
               <folding>
                 <element signature="e#18#55#0" expanded="true" />
               </folding>
@@ -48,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="client_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JaneStreetETC/client_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
+            <state relative-caret-position="585">
               <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
               <folding />
             </state>
@@ -82,9 +82,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="76" />
+    <option name="x" value="5" />
     <option name="y" value="23" />
-    <option name="width" value="959" />
+    <option name="width" value="1105" />
     <option name="height" value="726" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -399,7 +399,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="76" y="23" width="959" height="726" extended-state="0" />
+    <frame x="5" y="23" width="1105" height="726" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -470,12 +470,27 @@
           <line>22</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/JaneStreetETC/client_test.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+          <folding>
+            <element signature="e#18#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JaneStreetETC/JaneStreetETC.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -488,19 +503,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JaneStreetETC/client_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
+        <state relative-caret-position="585">
           <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-          <folding>
-            <element signature="e#18#55#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
