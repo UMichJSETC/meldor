@@ -21,6 +21,22 @@ def write(exchange, obj):
 def read(exchange):
     return json.loads(exchange.readline())
 
+def XLF_true(bond, gs, ms, wfc):
+    fair = 3*bond + 2*gs + 3*ms + 2*wfc
+    return fair
+
+def buyPackage(bond, gs, ms, wfc):
+    buyFair(bond, "BOND", 2011, 3)
+    buyFair(gs, "GS", 2012, 2)
+    buyFair(ms, "MS", 2013, 3)
+    buyFair(wfc, "WFC", 2014, 2)
+
+def sellPackage(bond, gs, ms, wfc):
+    sellFair(bond, "BOND", 2011, 3)
+    sellFair(gs, "GS", 2012, 2)
+    sellFair(ms, "MS", 2013, 3)
+    sellFair(wfc, "WFC", 2014, 2)
+
 def tradeBonds(exchange, volume, buy_sell, price, ID):
     write(exchange, {"type": "add", "order_id": ID, "symbol": "BOND", "dir": buy_sell, "price": price, "size": volume})
 
