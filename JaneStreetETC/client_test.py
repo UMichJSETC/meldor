@@ -31,12 +31,11 @@ def sellFair(fair, item, ID, volume):
 
 def parseExchange(exchange):
     feed = read(exchange)
-    parsedFeed = json.loads(feed.readline())
-    type = parsedFeed['type']
+    type = feed['type']
     if (type == "trade"):
-        symbol = parsedFeed['symbol']
-        price = parsedFeed['price']
-        size = parsedFeed['size']
+        symbol = feed['symbol']
+        price = feed['price']
+        size = feed['size']
         return symbol, price, size
 
 curr_trades = []
@@ -56,8 +55,8 @@ if __name__ == "__main__":
             tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
             sellIndex = sellIndex + 2
             x = time.time()
-        curr_trades = parseExchange(exchange)
-        print (curr_trades)
+        symbol, price, size = parseExchange(exchange)
+        print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
         hello_from_exchange = read(exchange)
         #print("The exchange replied:", hello_from_exchange, file=sys.stderr)

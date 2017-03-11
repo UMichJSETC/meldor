@@ -25,12 +25,11 @@ def tradeBonds(exchange, volume, buy_sell, price, ID):
 
 def parseExchange(exchange):
     feed = read(exchange)
-    parsedFeed = json.loads(feed.readline())
-    type = parsedFeed['type']
+    type = feed['type']
     if (type == "trade"):
-        symbol = parsedFeed['symbol']
-        price = parsedFeed['price']
-        size = parsedFeed['size']
+        symbol = feed['symbol']
+        price = feed['price']
+        size = feed['size']
         return symbol, price, size
 
 if __name__ == "__main__":
