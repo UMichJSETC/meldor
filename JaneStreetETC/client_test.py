@@ -47,12 +47,16 @@ def VALTrader(VALBZ_F, VALE_F,VALBZ_C, VALE_C):
         buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
         sellFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
     if ( VALE_C == 10):
+        print ("VALE_C = 10")
         conversionVALE(10-VALBZ_C,"SELL")
     elif (VALE_C == -10):
+        print ("VALE_C = -10")
         conversionVALE(10+VALBZ_C,"BUY")
     if (VALBZ_C == 10):
+        print ("VALBZ_C = 10")
         sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 1003, 9)
     elif (VALBZ_C == -10):
+        print ("VALBZ_C = -10")
         buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 1004, 9)
         
 
@@ -61,10 +65,25 @@ def VALTrader(VALBZ_F, VALE_F,VALBZ_C, VALE_C):
 curr_trades = []
 EFull = False
 BZFull = False
+BONDFull = False
+GSFull = False
+MSFull = False
+WFCFull = False
+XLFFull = False
+xlfFair = 0
 EFair = 0
 BZFair = 0
+bondFair = 0
+gsFair = 0
+msFair = 0
+wfcFair = 0
+xlf_ar = []
 valbz = []
 vale = []
+bond_ar = []
+gs_ar = []
+ms_ar = []
+wfc_ar = []
 vale_count = 0 
 valbz_count = 0
 if __name__ == "__main__":
@@ -91,6 +110,9 @@ if __name__ == "__main__":
             symbol = feed['symbol']
             price = feed['price']
             size = feed['size']
+
+
+            #Check which symbol we have and update stuff 
             if (symbol == "VALBZ"):
                 if (BZFull):
                     valbz.append(price)
@@ -110,17 +132,72 @@ if __name__ == "__main__":
                         EFull = True
                     vale.append(price)
                 EFair = np.median(vale)
+
+            elif (symbol == "BOND"):
+                if (BONDFull):
+                    bond_ar.append(price)
+                    bond_ar.pop(0)
+                else:
+                    if (len(bond_ar) > 5):
+                        BONDFull = True
+                    bond_ar.append(price)
+                bondFair = np.median(bond_ar)
+
+            elif (symbol == "MS"):
+                if (MSFull):
+                    ms_ar.append(price)
+                    ms_ar.pop(0)
+                else:
+                    if (len(ms_ar) > 5):
+                        MSFull = True
+                    ms_ar.append(price)
+                msFair = np.median(ms_ar)
+
+            elif (symbol == "GS"):
+                if (GSFull):
+                    gs_ar.append(price)
+                    gs_ar.pop(0)
+                else:
+                    if (len(gs_ar) > 5):
+                        GSFull = True
+                    gs_ar.append(price)
+                gsFair = np.median(gs_ar)
+
+            elif (symbol == "WFC"):
+                if (WFCFull):
+                    wfc_ar.append(price)
+                    wfc_ar.pop(0)
+                else:
+                    if (len(wfc_ar) > 5):
+                        WFCFull = True
+                    wfc_ar.append(price)
+                wfcFair = np.median(wfc_ar)
+
+            elif (symbol == "XLF"):
+                if (XLFFull):
+                    xlf_ar.append(price)
+                    xlf_ar.pop(0)
+                else:
+                    if (len(xlf_ar) > 5):
+                        XLFFull = True
+                    xlf_ar.append(price)
+                xlfFair = np.median(xlf_ar)
+            
             
             VALTrader(BZFair, EFair,valbz_count, vale_count)
-            if (type == "fill"):
-                orderID = feed['order_id']
-                symbol = feed['symbol']
-                price = feed['price']
-                size = feed['size']
-                if (symbol == "VALBZ"):
-                    valbz_count += size
-                elif (symbol == "VALE"):
-                    vale_count += size
+        if (XLF_true(bondFair, gsFair, msFair, wfcFair) > xlfFair):
+            sellPackage(bondFair, gsFair, msFair, wfcFair)
+        else:
+            buyPackage(bondFair, gsFair, msFair, wfcFair)
+        if (type == "fill"):
+            orderID = feed['order_id']
+            symbol = feed['symbol']
+            price = feed['price']
+            size = feed['size']
+            if (symbol == "VALBZ"):
+                valbz_count += size
+            elif (symbol == "VALE"):
+                vale_count += size
 
 
             print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
