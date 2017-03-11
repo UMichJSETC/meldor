@@ -24,3 +24,13 @@ def VALTrader(VALBZ_F, VALE_F):
         buyFair(VALE_F+1(VALBZ_F-VALE_F)/10, VALBZ, 999, volume)
         sellFair(VALE_F+1(VALBZ_F-VALE_F)/10, VALE, 1000, volume)
 
+
+if (type == "fill"):
+    orderID = feed['order_id']
+    symbol = feed['symbol']
+    price = feed['price']
+    size = feed['size']
+    if (symbol == "VALBZ"):
+        val_count += size
+    elif (symbol == "VALE"):
+        val_count += size
