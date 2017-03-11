@@ -37,11 +37,13 @@ def VALTrader(VALBZ_F, VALE_F):
     cancel(999);
     cancel(1000);
     if (VALBZ_F > VALE_F):
-        sellFair(VALE_F+(VALBZ_F-VALE_F)/10, "VALBZ", 999, 1)
-        buyFair(VALE_F+(VALBZ_F-VALE_F)/10, "VALE", 1000, 1)
+        sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 1)
+        buyFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALE", 1000, 1)
     else:
-        buyFair(VALE_F+(VALBZ_F-VALE_F)/10, "VALBZ", 999, 1)
-        sellFair(VALE_F+(VALBZ_F-VALE_F)/10, "VALE", 1000, 1)
+        buyFair(int(VALBZ_F+(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
+        sellFair(int(VALBZ_F+(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
+
+
 
 curr_trades = []
 EFull = False
@@ -82,6 +84,7 @@ if __name__ == "__main__":
                     if (len(valbz) > 5):
                         BZFull = True
                     valbz.append(price)
+                    print ("We did it!")
                 BZFair = np.median(valbz)
             elif (symbol == "VALE"):
                 if (EFull):
