@@ -30,6 +30,10 @@ def sellFair(fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
 curr_trades = []
+EFull = False
+BZFull = False
+EFair = 0
+BZFair = 0
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
@@ -52,6 +56,22 @@ if __name__ == "__main__":
             symbol = feed['symbol']
             price = feed['price']
             size = feed['size']
+            if (symbol == "VALBZ"):
+                if (BZFull):
+                    valbz.append(price)
+                    valbz.pop(0)
+                else:
+                    valbz.append(price)
+                BZFair = np.median(valbz)
+            elif (symbol == "VALE"):
+                if (EFull):
+                    vale.append(price)
+                    vale.pop(0)
+                else:
+                    vale.append(price)
+                EFair = np.median(vale)
+            
+
             print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
         hello_from_exchange = read(exchange)
