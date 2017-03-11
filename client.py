@@ -34,7 +34,7 @@ if __name__ == "__main__":
     buyIndex = 0
     sellIndex = 0
     while(True):
-        tradeBonds(1, "BUY", 99, buyIndex)
+        tradeBonds(1, "BUY", 999, buyIndex)
         ++buyIndex
-        tradeBonds(1, "SELL", 101, sellIndex)
+        tradeBonds(1, "SELL", 1001, sellIndex)
         ++sellIndex
