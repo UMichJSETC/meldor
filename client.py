@@ -103,6 +103,7 @@ if __name__ == "__main__":
                 EFair = np.median(vale)
 
             VALTrader(BZFair, EFair)
+            print("Still Trading VAL")
 
         hello_from_exchange = read(exchange)
         # print("The exchange replied:", hello_from_exchange, file=sys.stderr)
