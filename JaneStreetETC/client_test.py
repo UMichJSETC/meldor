@@ -40,8 +40,8 @@ def VALTrader(VALBZ_F, VALE_F):
         sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 1)
         buyFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALE", 1000, 1)
     else:
-        buyFair(int(VALBZ_F+(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
-        sellFair(int(VALBZ_F+(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
+        buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
+        sellFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
 
 
 
