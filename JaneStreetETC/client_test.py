@@ -124,6 +124,7 @@ if __name__ == "__main__":
 
             if ((gsFair != 0) and (msFair !=0) and (wfcFair != 0)):
                 xlfTrue = XLF_true(1000, gsFair, msFair, wfcFair)
+                print ("XLF True: ", xlfTrue)
             if (xlfTrue > xlfFair and (xlfFair != 0) and (xlfTrue != 0)):
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Buying XLF True")
