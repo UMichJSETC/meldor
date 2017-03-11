@@ -23,6 +23,7 @@ def read(exchange):
 
 def XLF_true(bond, gs, ms, wfc):
     fair = 3*bond + 2*gs + 3*ms + 2*wfc
+    fair = fair/10
     return fair
 
 def buyPackage(bond, gs, ms, wfc):
