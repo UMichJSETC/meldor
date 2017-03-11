@@ -13,3 +13,10 @@ def tradeBonds(volume, buy_sell, price, ID):
     order += price
     order += " "
     order += volume
+
+def VALTrader(VALBZ_F, VALE_F):
+    cancel(999);
+    cancel(1000);
+    if (VALBZ_F > VALE_F):
+        sellFair(VALE_F+1(VALBZ_F-VALE_F)/10, VALBZ, 999, volume)
+        buyFair(VALE_F+1(VALBZ_F-VALE_F)/10, VALE, 1000, volume)
