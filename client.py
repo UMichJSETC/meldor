@@ -45,6 +45,7 @@ if __name__ == "__main__":
     tradeBonds(exchange, 100, "SELL", 1001, sellIndex)
     sellIndex = sellIndex + 2
     while(True):
+        time.sleep(1)
         tradeBonds(exchange, 1, "BUY", 999, buyIndex)
         hello_from_exchange = read(exchange)
         print("The exchange replied:", hello_from_exchange, file=sys.stderr)
