@@ -121,17 +121,25 @@ if __name__ == "__main__":
             tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
             sellIndex = sellIndex + 2
 
-            if (gsFair != 0 and msFair !=0 and wfcFair):
+            if ((gsFair != 0) and (msFair !=0) and (wfcFair != 0)):
                 xlfTrue = XLF_true(1000, gsFair, msFair, wfcFair)
-            if (xlfTrue > xlfFair and (xlfFair != 0)):
+            if (xlfTrue > xlfFair and (xlfFair != 0) and (xlfTrue != 0)):
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Buying XLF True")
-                sellPackage(1000, gsFair, msFair, wfcFair)
+                #sellPackage(1000, gsFair, msFair, wfcFair)
+                sellFair(1000, "BOND", 2011, 3)
+                sellFair(gsFair, "GS", 2012, 2)
+                sellFair(msFair, "MS", 2013, 3)
+                sellFair(wfcFair, "WFC", 2014, 2)
                 buyFair(xlfTrue, "XLF", 2017, 1)
             else:
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Selling XLF Fair")
-                buyPackage(1000, gsFair, msFair, wfcFair)
+                #buyPackage(1000, gsFair, msFair, wfcFair)
+                buyFair(1000, "BOND", 2011, 3)
+                buyFair(gsFair, "GS", 2012, 2)
+                buyFair(msFair, "MS", 2013, 3)
+                buyFair(wfcFair, "WFC", 2014, 2)
                 sellFair(xlfTrue, "XLF", 2018, 1)
             x = time.time()
 
