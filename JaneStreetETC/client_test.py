@@ -32,8 +32,10 @@ def sellFair(fair, item, ID, volume):
 
 def cancel(ID):
     {"type": "cancel", "order_id": ID}
+def conversionVALE(volume,buy_sell):
+    write(exchange, {"type": "convert","order_id":1002,"symbol":"VALE", "dir": buy_sell, "size": volume})
 
-def VALTrader(VALBZ_F, VALE_F):
+def VALTrader(VALBZ_F, VALE_F,VALBZ_C, VALE_C):
     cancel(999);
     cancel(1000);
     if (VALBZ_F > VALE_F):
@@ -42,6 +44,15 @@ def VALTrader(VALBZ_F, VALE_F):
     else:
         buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
         sellFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALE", 1000, 1)
+    if ( VALE_C == 10):
+        conversionVALE(10-VALBZ_C,"SELL")
+    elif (VALE_C == -10):
+        conversionVALE(10+VALBZ_C,"BUY")
+    if (VALBZ_C == 10):
+        sellFair(int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 9)
+    elif (VALBZ_C == -10):
+        buyFair(int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 999, 1)
+        
 
 
 
@@ -52,6 +63,8 @@ EFair = 0
 BZFair = 0
 valbz = []
 vale = []
+vale_count = 0 
+valbz_count = 0
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
@@ -96,7 +109,17 @@ if __name__ == "__main__":
                     vale.append(price)
                 EFair = np.median(vale)
             
-            VALTrader(BZFair, EFair)
+            VALTrader(BZFair, EFair,valbz_count, vale_count)
+            if (type == "fill"):
+                orderID = feed['order_id']
+                symbol = feed['symbol']
+                price = feed['price']
+                size = feed['size']
+                if (symbol == "VALBZ"):
+                    valbz_count += size
+                elif (symbol == "VALE"):
+                    vale_count += size
+
 
             print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
