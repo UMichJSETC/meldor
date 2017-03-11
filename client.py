@@ -4,19 +4,13 @@ from __future__ import print_function
 import sys
 import socket
 import json
-def tradeBonds(volume, buy_sell, price, ID):
-    order = "ADD "
-    order += ID
-    order += " BOND"
-    order += buy_sell
-    order += " "
-    order += price
-    order += " "
-    order += volume
+import time
+
+
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("10.0.11.90", 25000))
+    s.connect(("10.0.11.90", 20000))
     return s.makefile('rw', 1)
 
 def write(exchange, obj):
@@ -26,6 +20,9 @@ def write(exchange, obj):
 def read(exchange):
     return json.loads(exchange.readline())
 
+def tradeBonds(exchange, volume, buy_sell, price, ID):
+    write(exchange, {"type": "add", "order_id": ID, "symbol": "BOND", "dir": buy_sell, "price": price, "size": volume})
+
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
@@ -34,7 +31,8 @@ if __name__ == "__main__":
     buyIndex = 0
     sellIndex = 0
     while(True):
-        tradeBonds(1, "BUY", 999, buyIndex)
+        time.sleep(1)
+        tradeBonds(exchange, 1, "BUY", 999, buyIndex)
         ++buyIndex
-        tradeBonds(1, "SELL", 1001, sellIndex)
+        tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
         ++sellIndex
