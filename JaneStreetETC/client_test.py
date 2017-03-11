@@ -86,6 +86,7 @@ GSFull = False
 MSFull = False
 WFCFull = False
 XLFFull = False
+xlfTrue = 0
 xlfFair = 0
 EFair = 0
 BZFair = 0
