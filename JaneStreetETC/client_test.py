@@ -30,6 +30,9 @@ def buyFair(fair, item, ID, volume):
 def sellFair(fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
+def cancel(ID):
+    {"type": "cancel", "order_id": ID}
+
 curr_trades = []
 EFull = False
 BZFull = False
