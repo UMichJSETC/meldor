@@ -4,9 +4,9 @@ import scipy as sp
 
 
 
-def tradeBonds(volume, buy_sell, price):
+def tradeBonds(volume, buy_sell, price, ID):
     order = "ADD "
-    order += 5
+    order += ID
     order += " BOND"
     order += buy_sell
     order += " "
