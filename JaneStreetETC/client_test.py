@@ -29,15 +29,6 @@ def buyFair(fair, item, ID, volume):
 def sellFair(fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
-def parseExchange(exchange):
-    feed = read(exchange)
-    type = feed['type']
-    if (type == "trade"):
-        symbol = feed['symbol']
-        price = feed['price']
-        size = feed['size']
-        return symbol, price, size
-
 curr_trades = []
 if __name__ == "__main__":
     exchange = connect()
@@ -55,8 +46,13 @@ if __name__ == "__main__":
             tradeBonds(exchange, 1, "SELL", 1001, sellIndex)
             sellIndex = sellIndex + 2
             x = time.time()
-        symbol, price, size = parseExchange(exchange)
-        print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
+        feed = read(exchange)
+        type = feed['type']
+        if (type == "trade"):
+            symbol = feed['symbol']
+            price = feed['price']
+            size = feed['size']
+            print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
         hello_from_exchange = read(exchange)
         #print("The exchange replied:", hello_from_exchange, file=sys.stderr)
