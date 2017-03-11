@@ -202,7 +202,7 @@ if __name__ == "__main__":
             
             
             VALTrader(BZFair, EFair,valbz_count, vale_count)
-            xlfTrue = XLF_true(bondFair, gsFair, msFair, wfcFair)
+        xlfTrue = XLF_true(bondFair, gsFair, msFair, wfcFair)
         if (xlfTrue > xlfFair):
             print("xlfTrue happens")
             sellPackage(bondFair, gsFair, msFair, wfcFair)
