@@ -40,6 +40,10 @@ if __name__ == "__main__":
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
     buyIndex = 1
     sellIndex = 2
+    tradeBonds(exchange, 100, "BUY", 999, buyIndex)
+    buyIndex = buyIndex + 2
+    tradeBonds(exchange, 100, "SELL", 1001, sellIndex)
+    sellIndex = sellIndex + 2
     while(True):
         time.sleep(1)
         tradeBonds(exchange, 1, "BUY", 999, buyIndex)
