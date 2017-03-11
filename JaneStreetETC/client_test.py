@@ -221,6 +221,7 @@ if __name__ == "__main__":
                         XLFFull = True
                     xlf_ar.append(price)
                 xlfFair = np.median(xlf_ar)
+                print ("XLF Fair updated to: ", xlfFair)
             
             
             VALTrader(exchange, BZFair, EFair,valbz_count, vale_count)
