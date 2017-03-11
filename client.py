@@ -23,7 +23,18 @@ def read(exchange):
 def tradeBonds(exchange, volume, buy_sell, price, ID):
     write(exchange, {"type": "add", "order_id": ID, "symbol": "BOND", "dir": buy_sell, "price": price, "size": volume})
 
+def parseExchange(exchange):
+    feed = read(exchange)
+    parsedFeed = json.loads(feed)
+    type = parsedFeed['type']
+    if (type == "trade"):
+        symbol = parsedFeed['symbol']
+        price = parsedFeed['price']
+        size = parsedFeed['size']
+        return symbol, price, size
+
 if __name__ == "__main__":
+    #handshake
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
     hello_from_exchange = read(exchange)
