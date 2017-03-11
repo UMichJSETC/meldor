@@ -31,7 +31,7 @@ def sellFair(fair, item, ID, volume):
 
 def parseExchange(exchange):
     feed = read(exchange)
-    parsedFeed = json.loads(feed)
+    parsedFeed = json.loads(feed.readline())
     type = parsedFeed['type']
     if (type == "trade"):
         symbol = parsedFeed['symbol']
