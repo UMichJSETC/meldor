@@ -36,7 +36,7 @@ def sellFair(fair, item, ID, volume):
 
 
 def cancel(exchange,ID):
-    write(exhcange, {"type": "cancel", "order_id": ID})
+    write(exchange, {"type": "cancel", "order_id": ID})
 
 
 def VALTrader(exchange, VALBZ_F, VALE_F):
