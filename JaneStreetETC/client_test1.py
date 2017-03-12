@@ -11,7 +11,7 @@ import numpy as np
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("10.0.11.90", 25000))
+    s.connect(("10.0.11.90", 25001))
     return s.makefile('rw', 1)
 
 def write(exchange, obj):
@@ -80,7 +80,7 @@ def VALTrader(exchange, VALBZ_F, VALE_F,VALBZ_C, VALE_C):
         print("VALBZ_C == 10")
         sellFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 1003, 9)
     elif (VALBZ_C == -10):
-        print ("VALBZ_C == 10")
+        print ("VALBZ_C == -10")
         buyFair(exchange, int(VALBZ_F+9*(VALE_F-VALBZ_F)/10), "VALBZ", 1004, 9)
         
 
