@@ -37,6 +37,9 @@ def sellPackage(bond, gs, ms, wfc):
     sellFair(ms, "MS", 2013, 3)
     sellFair(wfc, "WFC", 2014, 2)
 
+def newTrader(exchange, volume, buy_sell, price, ID, sym):
+    write(exchange, {"type": "add", "order_id": ID, "symbol": sym, "dir": buy_sell, "price": price, "size": volume})
+
 def tradeBonds(exchange, volume, buy_sell, price, ID):
     write(exchange, {"type": "add", "order_id": ID, "symbol": "BOND", "dir": buy_sell, "price": price, "size": volume})
 
@@ -127,21 +130,36 @@ if __name__ == "__main__":
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Buying XLF True")
                 #sellPackage(1000, gsFair, msFair, wfcFair)
-                sellFair(exchange, 1000, "BOND", 2011, 3)
-                sellFair(exchange, gsFair, "GS", 2012, 2)
-                sellFair(exchange, msFair, "MS", 2013, 3)
-                sellFair(exchange, wfcFair, "WFC", 2014, 2)
-                buyFair(exchange, xlfTrue, "XLF", 2017, 1)
+                #sellFair(exchange, 1000, "BOND", 2011, 3)
+                #sellFair(exchange, gsFair, "GS", 2012, 2)
+                #sellFair(exchange, msFair, "MS", 2013, 3)
+                #sellFair(exchange, wfcFair, "WFC", 2014, 2) 
+                #buyFair(exchange, xlfTrue, "XLF", 2017, 1)
+                newTrader(exchange, 3, "SELL", 1000, 2011, "BOND")
+                newTrader(exchange, 2, "SELL", gsFair, 2012, "GS")
+                newTrader(exchange, 3, "SELL", msFair, 2013, "MS")
+                newTrader(exchange, 2, "SELL", wfcFair, 2014, "WFC")
+                newTrader(exchange, 10, "BUY", xlfTrue, 2015, "XLF")
+                hello_from_exchange = read(exchange)
+                print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             else:
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Selling XLF Fair")
                 #buyPackage(1000, gsFair, msFair, wfcFair)
-                buyFair(exchange,1000, "BOND", 2011, 3)
-                buyFair(exchange, gsFair, "GS", 2012, 2)
-                buyFair(exchange, msFair, "MS", 2013, 3)
-                buyFair(exchange, wfcFair, "WFC", 2014, 2)
-                sellFair(exchange, xlfTrue, "XLF", 2018, 1)
+                #buyFair(exchange,1000, "BOND", 2011, 3)
+                #buyFair(exchange, gsFair, "GS", 2012, 2)
+                #buyFair(exchange, msFair, "MS", 2013, 3)
+                #buyFair(exchange, wfcFair, "WFC", 2014, 2)
+                #sellFair(exchange, xlfTrue, "XLF", 2018, 1)
+                newTrader(exchange, 3, "BUY", 1000, 2011, "BOND")
+                newTrader(exchange, 2, "BUY", gsFair, 2012, "GS")
+                newTrader(exchange, 3, "BUY", msFair, 2013, "MS")
+                newTrader(exchange, 2, "BUY", wfcFair, 2014, "WFC")
+                newTrader(exchange, 10, "SELL", xlfTrue, 2015, "XLF")
+                hello_from_exchange = read(exchange)
+                print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             x = time.time()
+
 
         feed = read(exchange)
         type = feed['type']
@@ -240,7 +258,6 @@ if __name__ == "__main__":
 
             print ("Symbol: ", symbol, " ", "Price: ", price, " ", "Volume: ", size)
 
-        hello_from_exchange = read(exchange)
-        #print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+
         hello_from_exchange = read(exchange)
         #print("The exchange replied:", hello_from_exchange, file=sys.stderr)
