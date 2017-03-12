@@ -23,6 +23,7 @@ def read(exchange):
 
 def XLF_true(bond, gs, ms, wfc):
     fair = 3*bond + 2*gs + 3*ms + 2*wfc
+    fair = fair/10
     return fair
 
 def buyPackage(bond, gs, ms, wfc):
@@ -126,6 +127,7 @@ if __name__ == "__main__":
 
             if ((gsFair != 0) and (msFair !=0) and (wfcFair != 0)):
                 xlfTrue = XLF_true(1000, gsFair, msFair, wfcFair)
+                print ("XLF True: ", xlfTrue)
             if (xlfTrue > xlfFair and (xlfFair != 0) and (xlfTrue != 0)):
                 print("GS Fair: ", gsFair, " ", "MS Fair: ", msFair, " ", "WFC Fair: ", wfcFair)
                 print("Buying XLF True")
@@ -239,6 +241,7 @@ if __name__ == "__main__":
                         XLFFull = True
                     xlf_ar.append(price)
                 xlfFair = np.median(xlf_ar)
+                print ("XLF Fair updated to: ", xlfFair)
             
             
             VALTrader(exchange, BZFair, EFair,valbz_count, vale_count)
