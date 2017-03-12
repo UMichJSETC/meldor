@@ -142,7 +142,7 @@ if __name__ == "__main__":
                 #newTrader(exchange, 2, "SELL", gsFair, 2012, "GS")
                 #newTrader(exchange, 3, "SELL", msFair, 2013, "MS")
                 #newTrader(exchange, 2, "SELL", wfcFair, 2014, "WFC")
-                newTrader(exchange, 1, "BUY", xlfTrue, 2015, "XLF")
+                newTrader(exchange, 1, "BUY", xlfFair, 2015, "XLF")
                 hello_from_exchange = read(exchange)
                 print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             else:
@@ -158,7 +158,7 @@ if __name__ == "__main__":
                 #newTrader(exchange, 2, "BUY", gsFair, 2012, "GS")
                 #newTrader(exchange, 3, "BUY", msFair, 2013, "MS")
                 #newTrader(exchange, 2, "BUY", wfcFair, 2014, "WFC")
-                newTrader(exchange, 1, "SELL", xlfTrue, 2015, "XLF")
+                newTrader(exchange, 1, "SELL", xlfFair, 2015, "XLF")
                 hello_from_exchange = read(exchange)
                 print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             x = time.time()
