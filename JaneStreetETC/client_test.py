@@ -50,16 +50,16 @@ def buyFair(exchange, fair, item, ID, volume):
 def sellFair(exchange, fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
-def cancel(ID):
-    {"type": "cancel", "order_id": ID}
+def cancel(exchange, ID):
+    write(exchange, {"type": "cancel", "order_id": ID})
 def conversionVALE(exchange, volume,buy_sell):
     write(exchange, {"type": "convert","order_id":1002,"symbol":"VALE", "dir": buy_sell, "size": volume})
 
 def VALTrader(exchange, VALBZ_F, VALE_F,VALBZ_C, VALE_C):
-    cancel(999);
-    cancel(1000);
-    cancel(1003);
-    cancel(1004);
+    cancel(exchange, 999);
+    cancel(exchange, 1000);
+    cancel(exchange, 1003);
+    cancel(exchange, 1004);
     if (VALBZ_F > VALE_F):
         sellFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALBZ", 999, 1)
         buyFair(exchange, int(VALE_F+(VALBZ_F-VALE_F)/10), "VALE", 1000, 1)
@@ -107,6 +107,7 @@ ms_ar = []
 wfc_ar = []
 vale_count = 0 
 valbz_count = 0
+order_id = [0,1,2,3,4,5]
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
