@@ -108,6 +108,8 @@ wfc_ar = []
 vale_count = 0 
 valbz_count = 0
 order_id = [0,1,2,3,4,5]
+xlfBuyOrderID = 9398
+xlfSellOrderID = 9397
 if __name__ == "__main__":
     exchange = connect()
     write(exchange, {"type": "hello", "team": "MELDOR"})
@@ -142,7 +144,8 @@ if __name__ == "__main__":
                 #newTrader(exchange, 2, "SELL", gsFair, 2012, "GS")
                 #newTrader(exchange, 3, "SELL", msFair, 2013, "MS")
                 #newTrader(exchange, 2, "SELL", wfcFair, 2014, "WFC")
-                newTrader(exchange, 1, "BUY", xlfFair, 2015, "XLF")
+                newTrader(exchange, 1, "BUY", xlfFair, xlfBuyOrderID, "XLF")
+                xlfBuyOrderID = xlfBuyOrderID + 2
                 hello_from_exchange = read(exchange)
                 print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             else:
@@ -158,7 +161,8 @@ if __name__ == "__main__":
                 #newTrader(exchange, 2, "BUY", gsFair, 2012, "GS")
                 #newTrader(exchange, 3, "BUY", msFair, 2013, "MS")
                 #newTrader(exchange, 2, "BUY", wfcFair, 2014, "WFC")
-                newTrader(exchange, 1, "SELL", xlfFair, 2015, "XLF")
+                newTrader(exchange, 1, "SELL", xlfFair, xlfSellOrderID, "XLF")
+                xlfSellOrderID = xlfSellOrderID + 2
                 hello_from_exchange = read(exchange)
                 print("The exchange replied:", hello_from_exchange, file=sys.stderr)
             x = time.time()
