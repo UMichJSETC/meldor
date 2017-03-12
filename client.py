@@ -35,13 +35,13 @@ def sellFair(fair, item, ID, volume):
     write(exchange, {"type": "add", "order_id": ID, "symbol": item, "dir": "SELL", "price": fair + 1, "size": volume})
 
 
-def cancel(ID):
-    {"type": "cancel", "order_id": ID}
+def cancel(exchange,ID):
+    write(exhcange, {"type": "cancel", "order_id": ID})
 
 
-def VALTrader(VALBZ_F, VALE_F):
-    cancel(999);
-    cancel(1000);
+def VALTrader(exchange, VALBZ_F, VALE_F):
+    cancel(exchange, 999);
+    cancel(exchange, 1000);
     if (VALBZ_F > VALE_F):
         sellFair(int(VALE_F + (VALBZ_F - VALE_F) / 10), "VALBZ", 999, 1)
         buyFair(int(VALE_F + (VALBZ_F - VALE_F) / 10), "VALE", 1000, 1)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
                     vale.append(price)
                 EFair = np.median(vale)
 
-            VALTrader(BZFair, EFair)
+            VALTrader(exchange, BZFair, EFair)
             print("Still Trading VAL")
 
         hello_from_exchange = read(exchange)
